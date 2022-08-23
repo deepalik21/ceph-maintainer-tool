@@ -17,14 +17,13 @@ for d in sorted(os.listdir(dir_path)):
     if os.path.isdir(os.path.join(dir_path, d)) and d != 'tests':
         d += '/'
         output+='\n'+d +'\n'
-        output += sp.getoutput(f'git blame -e src/pybind/mgr/{d}/module.py | cut -d\'(\' -f 2 | cut -d \'2\' -f 1 | grep \'redhat.com\' | sed \'s/[<>]//g\' | sort | uniq;')
+        output += sp.getoutput(f'git blame -e {dir_path}{d}/module.py | cut -d\'(\' -f 2 | cut -d \'2\' -f 1 | grep \'redhat.com\' | sed \'s/[<>]//g\' | sort | uniq;')
        
  
 for email in output.split('\n'):
     if '/' in email:
         print('==========\n'+email)
     if 'redhat.com' in email:
-        print(email)
         try:
             # Open a connection to the server. LDAP url.
             connect = lp.initialize('ldaps://ldap.corp.redhat.com')
