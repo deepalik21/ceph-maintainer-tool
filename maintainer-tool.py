@@ -3,10 +3,14 @@ import os, sys
 import subprocess as sp
 import ldap as lp
 
+stdoutOrigin=sys.stdout 
+sys.stdout = open("inspect_log.txt", "w")
+
 # Open a file
-dir_path = ""
+dir_path = str(sys.argv[1])
 dirs = os.listdir( dir_path )
 output=""
+print("You are inspecting repo under path", dir_path)
 
 #List the directories and their contributers
 for d in sorted(os.listdir(dir_path)):
