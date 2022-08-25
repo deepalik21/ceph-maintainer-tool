@@ -3,8 +3,6 @@ import os, sys
 import subprocess as sp
 import ldap as lp
 
-stdoutOrigin=sys.stdout 
-sys.stdout = open("inspect_log.txt", "w")
 
 # Open a file
 dir_path = str(sys.argv[1])
