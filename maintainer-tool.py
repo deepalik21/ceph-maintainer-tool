@@ -2,15 +2,27 @@
 import os, sys
 import subprocess as sp
 import ldap as lp
+import argparse
 
-stdoutOrigin=sys.stdout 
-sys.stdout = open("inspect_log.txt", "w")
+# Parse Arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--path", help="directory path to inspect from, default: src/pybind/mgr/", action="store_true", default="src/pybind/mgr/")
+parser.add_argument("-t", "--time", help="start time to inspect the data from, default: 2022-01-01", action="store_true", default="2022-01-01")
+parser.add_argument("-rh", "--RH", help="weather to filter RH employees, default: True", action="store_true", default=True)
+parser.add_argument("-o", "--output", help="output file to store results in, default: False", action="store_true", default=False)
+args = parser.parse_args()
+
+dir_path = args.path
+time = args.time
+employee_only = args.RH
+if args.output:
+    stdoutOrigin=sys.stdout 
+    sys.stdout = open("output.txt", "w")
 
 # Open a file
-dir_path = str(sys.argv[1])
 dirs = os.listdir( dir_path )
 output=""
-print("You are inspecting repo under path", dir_path)
+print(f"You are inspecting repo under path {dir_path}")
 
 #List the directories and their contributers
 for d in sorted(os.listdir(dir_path)):
