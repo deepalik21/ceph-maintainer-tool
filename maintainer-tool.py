@@ -3,8 +3,8 @@ import os, sys
 import subprocess as sp
 import ldap as lp
 
-stdoutOrigin=sys.stdout 
-sys.stdout = open("inspect_log.txt", "w")
+# stdoutOrigin=sys.stdout 
+# sys.stdout = open("inspect_log.txt", "w")
 
 # Open a file
 dir_path = str(sys.argv[1])
@@ -27,7 +27,7 @@ for email in output.split('\n'):
         try:
             # Open a connection to the server. LDAP url.
             connect = lp.initialize('ldaps://ldap.corp.redhat.com')
-            print('connected..')
+            # print('connected..')
         except lp.LDAPError as e:
             print(e)
 
